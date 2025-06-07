@@ -215,7 +215,7 @@ static ssize_t do_readv_writev(int type, struct file *file,
 		int len = iov[i].iov_len;
 		if (len < 0)
 			goto out;
-		(u32)tot_len += len;
+		*(u32 *)&tot_len += len;
 		if (tot_len < tmp || tot_len < (u32)len)
 			goto out;
 	}

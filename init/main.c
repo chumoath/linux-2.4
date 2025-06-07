@@ -629,11 +629,16 @@ static void __init do_initcalls(void)
 	initcall_t *call;
 
 	call = &__initcall_start;
+	/*
 	do {
 		(*call)();
 		call++;
 	} while (call < &__initcall_end);
-
+	*/
+	while (call < &__initcall_end) {
+		(*call)();
+		call++;
+	} 
 	/* Make sure there is no pending stuff from the initcall sequence */
 	flush_scheduled_tasks();
 }

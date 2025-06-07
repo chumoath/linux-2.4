@@ -19,6 +19,7 @@
 #include <asm/hardirq.h>
 #include <net/ndisc.h>
 #include <net/flow.h>
+#include <net/snmp.h>
 
 #define SIN6_LEN_RFC2133	24
 

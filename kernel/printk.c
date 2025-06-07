@@ -251,7 +251,7 @@ asmlinkage long sys_syslog(int type, char * buf, int len)
 	return do_syslog(type, buf, len);
 }
 
-asmlinkage int printk(const char *fmt, ...)
+int printk(const char *fmt, ...)
 {
 	va_list args;
 	int i;

@@ -1549,7 +1549,7 @@ skip_nfs:
 
 	bdev = bdget(kdev_t_to_nr(ROOT_DEV));
 	if (!bdev)
-		panic(__FUNCTION__ ": unable to allocate root device");
+		panic(": unable to allocate root device");
 	bdev->bd_op = devfs_get_ops (handle);
 	path_start = devfs_generate_path (handle, path + 5, sizeof (path) - 5);
 	mode = FMODE_READ;

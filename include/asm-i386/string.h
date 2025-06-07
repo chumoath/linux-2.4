@@ -29,6 +29,7 @@
  *		consider these trivial functions to be PD.
  */
 
+/*
 #define __HAVE_ARCH_STRCPY
 static inline char * strcpy(char * dest,const char *src)
 {
@@ -42,6 +43,7 @@ __asm__ __volatile__(
 	:"0" (src),"1" (dest) : "memory");
 return dest;
 }
+*/
 
 #define __HAVE_ARCH_STRNCPY
 static inline char * strncpy(char * dest,const char *src,size_t count)
@@ -549,10 +551,10 @@ static inline void * memscan(void * addr, int c, size_t size)
 {
 	if (!size)
 		return addr;
-	__asm__("repnz; scasb
-		jnz 1f
-		dec %%edi
-1:		"
+	__asm__("repnz; scasb;"
+		"jnz 1f;"
+		"dec %%edi;"
+"1:		"
 		: "=D" (addr), "=c" (size)
 		: "0" (addr), "1" (size), "a" (c));
 	return addr;

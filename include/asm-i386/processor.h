@@ -69,7 +69,7 @@ struct cpuinfo_x86 {
  */
 
 extern struct cpuinfo_x86 boot_cpu_data;
-extern struct tss_struct init_tss[NR_CPUS];
+//extern struct tss_struct init_tss[NR_CPUS];
 
 #ifdef CONFIG_SMP
 extern struct cpuinfo_x86 cpu_data[];
@@ -472,4 +472,5 @@ extern inline void rep_nop(void)
 	__asm__ __volatile__("rep;nop");
 }
 
+extern struct tss_struct init_tss[NR_CPUS];
 #endif /* __ASM_I386_PROCESSOR_H */

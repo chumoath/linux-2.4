@@ -27,8 +27,8 @@ ctl_table unix_table[] = {
 };
 
 static struct ctl_table_header * unix_sysctl_header;
-static struct ctl_table unix_root_table[];
-static struct ctl_table unix_net_table[];
+struct ctl_table unix_root_table[];
+struct ctl_table unix_net_table[];
 
 ctl_table unix_root_table[] = {
 	{CTL_NET, "net", NULL, 0, 0555, unix_net_table},

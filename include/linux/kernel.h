@@ -40,7 +40,8 @@
 # define NORET_AND     noreturn,
 
 #ifdef __i386__
-#define FASTCALL(x)	x __attribute__((regparm(3)))
+//#define FASTCALL(x)	x __attribute__((regparm(3)))
+#define FASTCALL(x)	x
 #else
 #define FASTCALL(x)	x
 #endif
@@ -68,7 +69,7 @@ extern void dev_probe_unlock(void);
 
 extern int session_of_pgrp(int pgrp);
 
-asmlinkage int printk(const char * fmt, ...)
+int printk(const char * fmt, ...)
 	__attribute__ ((format (printf, 1, 2)));
 
 extern int console_loglevel;

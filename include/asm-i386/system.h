@@ -9,7 +9,7 @@
 #ifdef __KERNEL__
 
 struct task_struct;	/* one of the stranger aspects of C forward declarations.. */
-extern void FASTCALL(__switch_to(struct task_struct *prev, struct task_struct *next));
+extern void __switch_to(struct task_struct *prev, struct task_struct *next) __attribute__((regparm(3)));
 
 #define prepare_to_switch()	do { } while(0)
 #define switch_to(prev,next,last) do {					\
@@ -83,7 +83,7 @@ static inline unsigned long _get_base(char * addr)
 #define loadsegment(seg,value)			\
 	asm volatile("\n"			\
 		"1:\t"				\
-		"movl %0,%%" #seg "\n"		\
+		"mov %0,%%" #seg "\n"		\
 		"2:\n"				\
 		".section .fixup,\"ax\"\n"	\
 		"3:\t"				\
@@ -145,10 +145,10 @@ extern inline void __set_64bit (unsigned long long * ptr,
 		unsigned int low, unsigned int high)
 {
 __asm__ __volatile__ (
-	"1:	movl (%0), %%eax;
-		movl 4(%0), %%edx;
-		cmpxchg8b (%0);
-		jnz 1b"
+	"1:	movl (%0), %%eax;"
+		"movl 4(%0), %%edx;"
+		"cmpxchg8b (%0);"
+		"jnz 1b;"
 	::		"D"(ptr),
 			"b"(low),
 			"c"(high)

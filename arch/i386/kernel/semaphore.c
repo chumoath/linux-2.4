@@ -231,49 +231,49 @@ asm(
 );
 
 asm(
-"
-.align 4
-.globl __down_read_failed
-__down_read_failed:
-	pushl	%edx
-	pushl	%ecx
-	jnc	2f
-
-3:	call	down_read_failed_biased
-
-1:	popl	%ecx
-	popl	%edx
-	ret
-
-2:	call	down_read_failed
-	" LOCK "subl	$1,(%eax)
-	jns	1b
-	jnc	2b
-	jmp	3b
-"
+""
+".align 4;"
+".globl __down_read_failed;"
+"__down_read_failed:"
+"	pushl	%edx;"
+"	pushl	%ecx;"
+"	jnc	2f;"
+""
+"3:	call	down_read_failed_biased;"
+""
+"1:	popl	%ecx;"
+"	popl	%edx;"
+"	ret;"
+""
+"2:	call	down_read_failed;"
+"	" LOCK "subl	$1,(%eax);"
+"	jns	1b;"
+"	jnc	2b;"
+"	jmp	3b;"
+""
 );
 
 asm(
-"
-.align 4
-.globl __down_write_failed
-__down_write_failed:
-	pushl	%edx
-	pushl	%ecx
-	jnc	2f
-
-3:	call	down_write_failed_biased
-
-1:	popl	%ecx
-	popl	%edx
-	ret
-
-2:	call	down_write_failed
-	" LOCK "subl	$" RW_LOCK_BIAS_STR ",(%eax)
-	jz	1b
-	jnc	2b
-	jmp	3b
-"
+""
+".align 4;"
+".globl __down_write_failed;"
+"__down_write_failed:"
+"	pushl	%edx;"
+"	pushl	%ecx;"
+"	jnc	2f;"
+""
+"3:	call	down_write_failed_biased;"
+""
+"1:	popl	%ecx;"
+"	popl	%edx;"
+"	ret;"
+""
+"2:	call	down_write_failed;"
+"	" LOCK "subl	$" RW_LOCK_BIAS_STR ",(%eax);"
+"	jz	1b;"
+"	jnc	2b;"
+"	jmp	3b;"
+""
 );
 
 struct rw_semaphore *FASTCALL(rwsem_wake_readers(struct rw_semaphore *sem));
@@ -384,23 +384,23 @@ struct rw_semaphore *down_write_failed(struct rw_semaphore *sem)
 }
 
 asm(
-"
-.align 4
-.globl __rwsem_wake
-__rwsem_wake:
-	pushl	%edx
-	pushl	%ecx
-
-	jz	1f
-	call	rwsem_wake_readers
-	jmp	2f
-
-1:	call	rwsem_wake_writer
-
-2:	popl	%ecx
-	popl	%edx
-	ret
-"
+""
+".align 4;"
+".globl __rwsem_wake;"
+"__rwsem_wake:"
+"	pushl	%edx;"
+"	pushl	%ecx;"
+""
+"	jz	1f;"
+"	call	rwsem_wake_readers;"
+"	jmp	2f;"
+";"
+"1:	call	rwsem_wake_writer;"
+""
+"2:	popl	%ecx;"
+"	popl	%edx;"
+"	ret;"
+""
 );
 
 /* Called when someone has done an up that transitioned from
@@ -425,30 +425,30 @@ struct rw_semaphore *rwsem_wake_writer(struct rw_semaphore *sem)
 
 #if defined(CONFIG_SMP)
 asm(
-"
-.align	4
-.globl	__write_lock_failed
-__write_lock_failed:
-	" LOCK "addl	$" RW_LOCK_BIAS_STR ",(%eax)
-1:	cmpl	$" RW_LOCK_BIAS_STR ",(%eax)
-	jne	1b
-
-	" LOCK "subl	$" RW_LOCK_BIAS_STR ",(%eax)
-	jnz	__write_lock_failed
-	ret
-
-
-.align	4
-.globl	__read_lock_failed
-__read_lock_failed:
-	lock ; incl	(%eax)
-1:	cmpl	$1,(%eax)
-	js	1b
-
-	lock ; decl	(%eax)
-	js	__read_lock_failed
-	ret
-"
+""
+".align	4;"
+".globl	__write_lock_failed;"
+"__write_lock_failed:"
+"	" LOCK "addl	$" RW_LOCK_BIAS_STR ",(%eax);"
+"1:	cmpl	$" RW_LOCK_BIAS_STR ",(%eax);"
+"	jne	1b;"
+";"
+"	" LOCK "subl	$" RW_LOCK_BIAS_STR ",(%eax);"
+"	jnz	__write_lock_failed;"
+"	ret;"
+";"
+";"
+".align	4;"
+".globl	__read_lock_failed;"
+"__read_lock_failed:"
+"	lock ; incl	(%eax);"
+"1:	cmpl	$1,(%eax);"
+"	js	1b;"
+";"
+"	lock ; decl	(%eax);"
+"	js	__read_lock_failed;"
+"	ret;"
+""
 );
 #endif
 

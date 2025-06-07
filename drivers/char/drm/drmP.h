@@ -256,9 +256,9 @@ static inline unsigned long __cmpxchg(volatile void *ptr, unsigned long old,
 
 				/* Macros to make printk easier */
 #define DRM_ERROR(fmt, arg...) \
-	printk(KERN_ERR "[" DRM_NAME ":" __FUNCTION__ "] *ERROR* " fmt , ##arg)
+	printk(KERN_ERR "[" DRM_NAME ":" "] *ERROR* " fmt , ##arg)
 #define DRM_MEM_ERROR(area, fmt, arg...) \
-	printk(KERN_ERR "[" DRM_NAME ":" __FUNCTION__ ":%s] *ERROR* " fmt , \
+	printk(KERN_ERR "[" DRM_NAME ":" ":%s] *ERROR* " fmt , \
 	       drm_mem_stats[area].name , ##arg)
 #define DRM_INFO(fmt, arg...)  printk(KERN_INFO "[" DRM_NAME "] " fmt , ##arg)
 
@@ -267,7 +267,7 @@ static inline unsigned long __cmpxchg(volatile void *ptr, unsigned long old,
 	do {								  \
 		if (drm_flags&DRM_FLAG_DEBUG)				  \
 			printk(KERN_DEBUG				  \
-			       "[" DRM_NAME ":" __FUNCTION__ "] " fmt ,	  \
+			       "[" DRM_NAME ":" "] " fmt ,	  \
 			       ##arg);					  \
 	} while (0)
 #else

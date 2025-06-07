@@ -549,6 +549,7 @@ move_rr_back:
 		default:
 			del_from_runqueue(prev);
 		case TASK_RUNNING:
+		;
 	}
 	prev->need_resched = 0;
 

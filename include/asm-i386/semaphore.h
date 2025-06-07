@@ -101,10 +101,10 @@ asmlinkage int  __down_failed_interruptible(void  /* params in registers */);
 asmlinkage int  __down_failed_trylock(void  /* params in registers */);
 asmlinkage void __up_wakeup(void /* special register calling convention */);
 
-asmlinkage void __down(struct semaphore * sem);
-asmlinkage int  __down_interruptible(struct semaphore * sem);
-asmlinkage int  __down_trylock(struct semaphore * sem);
-asmlinkage void __up(struct semaphore * sem);
+void __down(struct semaphore * sem);
+int  __down_interruptible(struct semaphore * sem);
+int  __down_trylock(struct semaphore * sem);
+void __up(struct semaphore * sem);
 
 /*
  * This is ugly, but we want the default case to fall through.
