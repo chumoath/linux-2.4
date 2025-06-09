@@ -5,6 +5,7 @@
 - root:
     - http://cdimage.debian.org/mirror/cdimage/archive/older-contrib/2.2/debian-2.2r0-i386-CD1.iso
     - install/root.bin -> gzip -dc root.bin > hda.img
+    - cann't config devfs, would remount dev so that not find device node.
 
 - exec:
     - make menuconfig
