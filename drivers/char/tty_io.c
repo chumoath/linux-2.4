@@ -2144,8 +2144,10 @@ int tty_unregister_driver(struct tty_driver *driver)
  * Just do some early initializations, and do the complex setup
  * later.
  */
+extern int __init console_setup(char *str);
 void __init console_init(void)
 {
+	console_setup("ttyS0");
 	/* Setup the default TTY line discipline. */
 	memset(ldiscs, 0, sizeof(ldiscs));
 	(void) tty_register_ldisc(N_TTY, &tty_ldisc_N_TTY);

@@ -55,7 +55,8 @@ static int preferred_console = -1;
 /*
  *	Setup a list of consoles. Called from init/main.c
  */
-static int __init console_setup(char *str)
+// static int __init console_setup(char *str)
+int __init console_setup(char *str)
 {
 	struct console_cmdline *c;
 	char name[sizeof(c->name)];
@@ -83,6 +84,11 @@ static int __init console_setup(char *str)
 		if (*s >= '0' && *s <= '9')
 			break;
 	idx = simple_strtoul(s, NULL, 10);
+
+	// no need, must be ttyS; compare with drivers/char/serial.c->sercons.name("ttyS")
+	// for(; *s; s++)
+        //        if (!(*s >= '0' && *s <= '9')) break;
+
 	*s = 0;
 
 	/*
