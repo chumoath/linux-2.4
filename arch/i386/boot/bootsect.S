@@ -238,9 +238,15 @@ rp_read:
 	movw	%es, %ax
 	subw	$SYSSEG, %ax
 #endif
+	# head: 2 track: 80(0x50) sector: 18 => completion condition with problem; avoid it.
+	pushw   %ax
+	movw    $0x50, %ax
+	cmpw    track, %ax
+	popw    %ax
+	je      own_ret
 	cmpw	syssize, %ax		# have we loaded all yet?
 	jbe	ok1_read
-
+own_ret:
 	ret
 
 ok1_read:
