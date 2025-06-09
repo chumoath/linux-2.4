@@ -14,3 +14,4 @@
     - qemu-system-i386 -m 4G -boot a -serial stdio -blockdev driver=file,node-name=f0,filename=floppy.img -device floppy,drive=f0 -hda hda.img
     - qemu-system-i386 -m 4G -boot a -serial stdio -fda floppy.img -hda hda.img
     - target remote 192.168.33.1:1234
+    - x/10i $($cs * 16 + $eip)
