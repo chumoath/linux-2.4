@@ -28,7 +28,7 @@
 
 asmlinkage int sys_wait4(pid_t pid, unsigned long *stat_addr,
 			 int options, unsigned long *ru);
-int FASTCALL(do_signal(struct pt_regs *regs, sigset_t *oldset));
+int do_signal(struct pt_regs *regs, sigset_t *oldset) __attribute__((regparm(3)));
 
 int copy_siginfo_to_user(siginfo_t *to, siginfo_t *from)
 {
@@ -581,7 +581,7 @@ handle_signal(unsigned long sig, struct k_sigaction *ka,
  * want to handle. Thus you cannot kill init even with a SIGKILL even by
  * mistake.
  */
-int do_signal(struct pt_regs *regs, sigset_t *oldset)
+__attribute__((regparm(3))) int do_signal(struct pt_regs *regs, sigset_t *oldset)
 {
 	siginfo_t info;
 	struct k_sigaction *ka;
