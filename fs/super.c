@@ -1471,6 +1471,8 @@ void __init mount_root(void)
 	char path[64];
 	int path_start = -1;
 
+	// init/main.c => root_dev_names => "hda", 0x0300
+	ROOT_DEV = 0x0300;
 #ifdef CONFIG_ROOT_NFS
 	void *data;
 	if (MAJOR(ROOT_DEV) != UNNAMED_MAJOR)

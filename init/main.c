@@ -128,7 +128,7 @@ kdev_t real_root_dev;
 
 int root_mountflags = MS_RDONLY;
 char *execute_command;
-char root_device_name[64];
+char root_device_name[64] = "/dev/hda";
 
 
 static char * argv_init[MAX_INIT_ARGS+2] = { "init", NULL, };
