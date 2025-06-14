@@ -374,4 +374,5 @@ comment 'Kernel hacking'
 
 #bool 'Debug kmalloc/kfree' CONFIG_DEBUG_MALLOC
 bool 'Magic SysRq key' CONFIG_MAGIC_SYSRQ
+string 'Kernel Command Line' CONFIG_KERNEL_COMMANDLINE
 endmenu

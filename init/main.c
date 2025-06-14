@@ -296,7 +296,7 @@ kdev_t __init name_to_kdev_t(char *line)
 	return to_kdev_t(base + simple_strtoul(line,NULL,base?10:16));
 }
 
-int __init root_dev_setup(char *line)
+static int __init root_dev_setup(char *line)
 {
 	int i;
 	char ch;

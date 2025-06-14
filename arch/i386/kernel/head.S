@@ -153,6 +153,7 @@ startup_32:
 	rep
 	movsl
 	xorl %eax,%eax
+	/*
 	movl $512,%ecx
 	rep
 	stosl
@@ -168,6 +169,7 @@ startup_32:
 	movl $512,%ecx
 	rep
 	movsl
+	*/
 1:
 #ifdef CONFIG_SMP
 checkCPUtype:
@@ -413,6 +415,9 @@ ENTRY(pg1)
 
 .org 0x4000
 ENTRY(empty_zero_page)
+
+.org 0x4800
+.string CONFIG_KERNEL_COMMANDLINE
 
 .org 0x5000
 ENTRY(empty_bad_page)

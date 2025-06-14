@@ -708,3 +708,4 @@ CONFIG_USB_STORAGE=y
 # Kernel hacking
 #
 # CONFIG_MAGIC_SYSRQ is not set
+CONFIG_KERNEL_COMMANDLINE="root=/dev/hda console=ttyS0"
